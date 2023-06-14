@@ -1,7 +1,9 @@
 
-/*Drop database dbMindLink1
+/*
+Drop database dbMindLink1
 go
 */
+
 Create database dbMindLink1
 go
 
@@ -96,7 +98,8 @@ IDContacto int
 Create table TbContactos(
 IDContacto int identity(1,1) primary key,
 Correo varchar(300) unique,
-NumTelefonico nvarchar(14)
+NumTelefonico nvarchar(14),
+Firma image
 );
 Create table TbGenero(
 IDGenero int identity(1,1) primary key,
@@ -113,6 +116,7 @@ Apellido varchar(90),
 Salario varbinary(max),
 FNacimiento date,
 DUI varchar(20) unique,
+Frase Varchar(300),
 IDTipoUsuario int,
 IDActividadLaboral int,
 IDGenero int,
@@ -171,7 +175,8 @@ Fecha date,
 Descripcion varchar(900),
 IDPaciente int,
 IDClinica int,
-IDMedicamento int
+IDMedicamento int,
+IDContacto int
 );
 Create table TbMedicamentos(
 IDMedicamento int identity(1,1) primary key,
@@ -300,6 +305,9 @@ Foreign key (IDClinica) References TbClinicas(IDClinica);
 
 Alter table TbRecetasMedicas Add constraint fk_IDMedicamentos_Medica
 Foreign key (IDMedicamento) References TbMedicamentos(IDMedicamento);
+
+Alter table TbRecetasMedicas Add constraint fk_IDContacto_TbRecet
+Foreign key (IDContacto) References TbContactos(IDContacto);
 /*
 Ya esta bien aaaa
 */
