@@ -128,6 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Usuario"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -152,6 +153,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Contraseña"
         android:inputType="textPassword"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -174,7 +176,7 @@
         app:layout_constraintVertical_bias="0.682" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/imgbtnIniciarSesion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#647484 "
@@ -184,7 +186,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.774"
-        app:srcCompat="@drawable/signinbutton" />
+        app:srcCompat="@drawable/signinbutton"
+
+
+        tools:text="@string/btnIniciarSesion" />
+
 
     <ImageView
         android:id="@+id/imageView9"
@@ -198,7 +204,7 @@
         app:srcCompat="@drawable/continuewith" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/btnRegistrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrate"
@@ -208,7 +214,8 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.833" />
+        app:layout_constraintVertical_bias="0.833"
+        tools:text="@string/btnRegistrar" />
 
     <TextView
         android:id="@+id/textView5"
