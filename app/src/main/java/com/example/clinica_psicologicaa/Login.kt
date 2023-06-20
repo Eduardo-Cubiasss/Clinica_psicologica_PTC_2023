@@ -11,13 +11,19 @@ class Login : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        val btnText = findViewById<TextView>(R.id.btnRegistrar)
+        val btnTextRegister = findViewById<TextView>(R.id.btnRegistrar)
 
-        btnText.setOnClickListener{
+        btnTextRegister.setOnClickListener{
             val intent: Intent = Intent(this, Registrarse::class.java)
             startActivity(intent)
         }
 
+        val btnTextRecordar = findViewById<TextView>(R.id.btnRecordarPassword)
+
+        btnTextRecordar.setOnClickListener{
+            val intent: Intent = Intent(this, RecordarPassword::class.java)
+            startActivity(intent)
+        }
     }
 
 }
