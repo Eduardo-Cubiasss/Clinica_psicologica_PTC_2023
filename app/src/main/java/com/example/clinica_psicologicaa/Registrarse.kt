@@ -1,11 +1,11 @@
-    package com.example.clinica_psicologicaa
+package com.example.clinica_psicologicaa
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class Register : AppCompatActivity() {
+class Registrarse : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_registrarse)
     }
 }
