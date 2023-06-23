@@ -1,13 +1,14 @@
 
 /*
-Drop database dbMindLink1
-go
+Drop database dbMindLink
+go 
+
 */
 
-Create database dbMindLink1
+Create database dbMindLink
 go
 
-Use dbMindLink1
+Use dbMindLink
 go
 
 Create table TbArticulos(
@@ -37,7 +38,7 @@ IDAdministrador int
 Create table TbEstadisticas(
 IDEstadistica int identity(1,1) primary key,
 IDCita int,
-IDClinica int
+IDClinica varchar(5)
 );
 Create table TbPruebas(
 IDPrueba int identity(1,1) primary key,
@@ -81,8 +82,8 @@ IDEmpleado int,
 IDPaciente int
 );
 Create table TbClinicas(
-IDClinica int identity(1,1) primary key,
-NombreClinica varchar(300)Not null,
+IDClinica Varchar(5) primary key,
+NombreClinica varchar(300),
 Ubicacion Varchar(1000), 
 Dueño nvarchar(100),
 Descripcion varchar(400),
@@ -98,8 +99,7 @@ IDContacto int
 Create table TbContactos(
 IDContacto int identity(1,1) primary key,
 Correo varchar(300) unique,
-NumTelefonico nvarchar(14),
-Firma image
+NumTelefonico nvarchar(14)
 );
 Create table TbGenero(
 IDGenero int identity(1,1) primary key,
@@ -116,11 +116,10 @@ Apellido varchar(90),
 Salario varbinary(max),
 FNacimiento date,
 DUI varchar(20) unique,
-Frase Varchar(300),
 IDTipoUsuario int,
 IDActividadLaboral int,
 IDGenero int,
-IDClinica int,
+IDClinica varchar(5),
 IDUsuario int
 );
 Create Table TbAdministrador(
@@ -131,7 +130,7 @@ FNacimiento date,
 DUI varchar(20) unique,
 IDTipoUsuario int,
 IDGenero int,
-IDClinica int,
+IDClinica varchar(5),
 IDUsuario int
 );
 
@@ -143,7 +142,7 @@ FNacimiento date,
 DUI varchar(20) unique,
 IDTipoUsuario int,
 IDGenero int,
-IDClinica int,
+IDClinica Varchar(5),
 IDUsuario int
 );
 Create Table TbTipoUsuarios(
@@ -174,16 +173,15 @@ IDReceta int identity(1,1) primary key,
 Fecha date,
 Descripcion varchar(900),
 IDPaciente int,
-IDClinica int,
-IDMedicamento int,
-IDContacto int
+IDClinica Varchar(5),
+IDMedicamento int
 );
 Create table TbMedicamentos(
 IDMedicamento int identity(1,1) primary key,
 NombreMedicamento varchar(500)
 );
 
-Insert into TbMedicamentos values ('Penedol')
+Insert into TbAdministrador 
 Select * from TbMedicamentos
 
 Alter table TbArticulos Add constraint fk_IDEmpleado_TBArt
@@ -305,10 +303,58 @@ Foreign key (IDClinica) References TbClinicas(IDClinica);
 
 Alter table TbRecetasMedicas Add constraint fk_IDMedicamentos_Medica
 Foreign key (IDMedicamento) References TbMedicamentos(IDMedicamento);
-
-Alter table TbRecetasMedicas Add constraint fk_IDContacto_TbRecet
-Foreign key (IDContacto) References TbContactos(IDContacto);
 /*
 Ya esta bien aaaa
 */
 
+/*
+Desde aquí comienzan los procesos almacenados
+*/
+CREATE PROCEDURE RegistrarAdmin
+    @a VARCHAR(90),
+    @e VARCHAR(50),
+    @i Varbinary(max),
+	@o VARCHAR(5)
+AS
+BEGIN
+
+    -- Insertar datos en la tabla TbClinicas si no existe
+    IF NOT EXISTS (SELECT 1 FROM TbClinicas WHERE IDClinica = @o)
+    BEGIN
+        INSERT INTO TbClinicas (IDClinica)
+        VALUES (@o)
+    END
+
+    -- Insertar datos en la tabla TbUsuarios si no existe
+    IF NOT EXISTS (SELECT 1 FROM TbUsuarios WHERE UserName = @e)
+    BEGIN
+        INSERT INTO TbUsuarios (Username, Contraseña)
+        VALUES (@e, @i)
+    END
+	-- Obtener el IDUsuario basado en el Username
+    DECLARE @IDUsuario INT
+    SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE Username = @e)
+	-- Insertar datos en la tabla TbAdministrador
+    INSERT INTO TbAdministrador (Nombre, IDClinica, IDUsuario)
+    VALUES (@a, @o, @IDUsuario)
+
+END
+
+Drop Procedure RegistrarAdmin
+Select * from TbUsuarios
+Select * from TbAdministrador
+Select * from TbClinicas
+Delete TbUsuarios
+Delete TbAdministrador
+Delete TbClinicas
+
+	
+DBCC CHECKIDENT ('TbUsuarios', RESEED, 0);
+DBCC CHECKIDENT ('TbAdministrador', RESEED, 0);
+
+
+EXEC RegistrarAdmin 'Antonio Perez', 'AntonioLiendra1', 0x0F00000002F11831, '52281'
+/*
+Desde aquí comienzan las vistas
+
+*/
