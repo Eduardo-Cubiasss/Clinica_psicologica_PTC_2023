@@ -205,7 +205,7 @@
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.68"
+        app:layout_constraintVertical_bias="0.692"
         app:srcCompat="@drawable/rectangleuno" />
 
     <TextView
@@ -356,7 +356,7 @@
         android:id="@+id/editTextPhone"
         android:layout_width="325dp"
         android:layout_height="40dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="6dp"
         android:ems="10"
         android:inputType="phone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -393,18 +393,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.65" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="314dp"
-        android:layout_height="50dp"
-        android:text="Crear cuenta"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.783" />
-
     <TextView
         android:id="@+id/btnOiniciarsesion"
         android:layout_width="wrap_content"
@@ -430,5 +418,18 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.976"
         app:srcCompat="@drawable/googlebutton" />
+
+    <ImageButton
+        android:id="@+id/imageButton5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background=" #646c7c "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.793"
+        app:srcCompat="@drawable/signinbuttontres" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
