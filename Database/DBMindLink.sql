@@ -6,10 +6,10 @@ go
 */
 
 
-Create database dbMindLink
+Create database dbMindLink1
 go
 
-Use dbMindLink
+Use dbMindLink1
 go
 
 Create table TbArticulos(
@@ -370,44 +370,61 @@ IDContacto int
 */
 
 --Aqui empieza el proceso para logear todo tipo de usuario, admin, empleado, usuario
-Create PROCEDURE PDLogear
+CREATE PROCEDURE PDLogear
     @UsernameIngresado VARCHAR(50),
     @ContraseñaIngresado NVARCHAR(90),
-	@acceso BIT OUTPUT
+    @acceso BIT OUTPUT
 AS
 BEGIN
-	DECLARE @IDUsuario INT;
-	DECLARE @username VARCHAR(50);
-	SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE Username = @UsernameIngresado);
-	SET @username = (SELECT UserName FROM TbUsuarios Where IDUsuario = @IDUsuario);
+    DECLARE @IDUsuario INT;
+    DECLARE @username VARCHAR(50);
 
-	IF(@username = @UsernameIngresado)
-		BEGIN
-			-- Con esto declaramos la variable que contendra el Hash
-			DECLARE @HashContraseñaTbU VARBINARY (64);
-			DECLARE @Contraseñareal VARBINARY (64);
-			SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @ContraseñaIngresado);
-			SET @Contraseñareal = (SELECT Contraseña FROM TbUsuarios WHERE IDUsuario = @IDUsuario);
- -- Con las lineas de abajo mandamos veremos si la contraseña mandada ya hasheada coincide con la resgitrada
-				IF(@HashContraseñaTbU = @Contraseñareal)
-					BEGIN
-						SET @acceso = 1;
-					END
-				ELSE
-					BEGIN
-						SET @acceso = 0;
-					END
-		END
-		ELSE
-		BEGIN
-			SET @acceso = 0;
-		END
+    -- Agrega la declaración de la variable @resultado aquí
+    DECLARE @resultado BIT;
+
+    SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE Username = @UsernameIngresado);
+    SET @username = (SELECT UserName FROM TbUsuarios Where IDUsuario = @IDUsuario);
+
+    IF(@username = @UsernameIngresado)
+    BEGIN
+        -- Con esto declaramos la variable que contendrá el Hash
+        DECLARE @HashContraseñaTbU VARBINARY (64);
+        DECLARE @Contraseñareal VARBINARY (64);
+
+        SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @ContraseñaIngresado);
+        SET @Contraseñareal = (SELECT Contraseña FROM TbUsuarios WHERE IDUsuario = @IDUsuario);
+
+        -- Con las líneas de abajo, veremos si la contraseña mandada ya hasheada coincide con la registrada
+        IF (@HashContraseñaTbU = @Contraseñareal)
+        BEGIN
+            SET @resultado = 1;
+        END
+        ELSE
+        BEGIN
+            SET @resultado = 0;
+        END
+    END
+    ELSE
+    BEGIN
+        SET @resultado = 0;
+    END
+
+    SET @acceso = @resultado;
 END
-/*
-Esto es namas para comprobar que funciona el proceso
+
+
+
 DECLARE @resultado BIT;
 EXEC PDLogear 'AntonioLiendra1', 'Contraseña', @resultado OUTPUT;
-SELECT @resultado AS Acceso;
+SELECT @resultado AS acceso;
+PRINT @resultado;
+
+
+/*
+Esto es namas para comprobar que funciona el proceso
+DECLARE @resultado INT;
+
+
 */
 
 --Esto borra el proceso jejejeje
