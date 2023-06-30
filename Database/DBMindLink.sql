@@ -6,10 +6,10 @@ go
 */
 
 
-Create database dbMindLink1
+Create database dbMindLink
 go
 
-Use dbMindLink1
+Use dbMindLink
 go
 
 Create table TbArticulos(
@@ -99,7 +99,7 @@ IDContacto int
 );
 Create table TbContactos(
 IDContacto int identity(1,1) primary key,
-Correo varchar(300) unique,
+Correo varchar(300),
 NumTelefonico nvarchar(14)
 );
 Create table TbGenero(
@@ -128,7 +128,7 @@ IDAdministrador int identity(1,1) primary key,
 Nombre varchar(90),
 Apellido varchar(90),
 FNacimiento date,
-DUI varchar(20) unique,
+DUI varchar(20),
 IDTipoUsuario int,
 IDGenero int,
 IDClinica varchar(5),
@@ -140,7 +140,7 @@ IDPaciente int identity(1,1) primary key,
 Nombre varchar(90),
 Apellido varchar(90),
 FNacimiento date,
-DUI varchar(20) unique,
+DUI varchar(20),
 IDTipoUsuario int,
 IDGenero int,
 IDClinica Varchar(5),
@@ -181,6 +181,7 @@ Create table TbMedicamentos(
 IDMedicamento int identity(1,1) primary key,
 NombreMedicamento varchar(500)
 );
+
 
 --Insert into TbAdministrador 
 --Select * from TbMedicamentos
@@ -314,7 +315,7 @@ Desde aquí comienzan los procesos almacenados
 CREATE PROCEDURE PDRegistrarAdmin
     @nombreTbA VARCHAR(90),
     @UsernameTbU VARCHAR(50),
-    @ContraseñaTbU NVARCHAR(90),
+    @ContraseñaTbU VARCHAR(90),
 	@IdTbCli VARCHAR(5)
 AS
 BEGIN
@@ -348,9 +349,7 @@ END
 EXEC PDRegistrarAdmin 'Antonio Perez', 'AntonioLiendra1', 'Contraseña', '52281'
 /* esto es para comprobar que el PDResgistrarAdmin funciona jejeje
 Drop Procedure PDRegistrarAdmin
-Select * from TbUsuarios
-Select * from TbAdministrador
-Select * from TbClinicas
+
 Delete TbUsuarios
 Delete TbAdministrador
 Delete TbClinicas
@@ -366,10 +365,13 @@ Contraseña varbinary(64),
 FotoPerfil image,
 IDContacto int
 );
-
+Select * from TbUsuarios
+Select * from TbAdministrador
+Select * from TbClinicas
 */
 
 --Aqui empieza el proceso para logear todo tipo de usuario, admin, empleado, usuario
+
 CREATE PROCEDURE PDLogear
     @UsernameIngresado VARCHAR(50),
     @ContraseñaIngresado NVARCHAR(90),
@@ -419,7 +421,7 @@ EXEC PDLogear 'AntonioLiendra1', 'Contraseña', @resultado OUTPUT;
 SELECT @resultado AS acceso;
 PRINT @resultado;
 
-
+---Aqui comienza otro proceso, este es para registrar pacientes
 /*
 Esto es namas para comprobar que funciona el proceso
 DECLARE @resultado INT;
@@ -428,8 +430,57 @@ DECLARE @resultado INT;
 */
 
 --Esto borra el proceso jejejeje
-DROP Procedure PDLogear
+--DROP Procedure PDLogear
+---
+--- Aqui empieza el proceso de registrar pacientes
+CREATE PROCEDURE PDRegistrarpaciente
+    @nombreTbP VARCHAR(90),
+	@apellidoTbp VARCHAR(90),
+	@fechadenaci DATE,
+	@IdTbCli VARCHAR(5),
+    @UsernameTbU VARCHAR(50),
+    @ContraseñaTbU VARCHAR(90),
+	@Numtel nvarchar(14)
+AS
+BEGIN
+	DECLARE @clinica Varchar(5);
+	SET @clinica = (SELECT IDClinica FROM TbClinicas WHERE IDClinica = @IdTbCli);
+    -- Insertar datos en la tabla TbClinicas si existe
+    IF (@clinica = @IdTbCli)
+    BEGIN
+         -- Insertar datos en la tabla TbUsuarios si no existe
+		 IF NOT EXISTS (SELECT 1 FROM TbUsuarios WHERE UserName = @UsernameTbU)
+			BEGIN
+			-- Con esto declaramos la variable que contendra el Hash
+			DECLARE @HashContraseñaTbU VARBINARY (64);
+			SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @ContraseñaTbU);
+			INSERT INTO TbContactos (NumTelefonico)
+			VALUES (@Numtel)
+			DECLARE @Numerotel INT
+			SET @Numerotel = (SELECT IDContacto FROM TbContactos WHERE @NumTel = @Numerotel)
+			-- Con las dos lineas de abajo mandamos a almacenar el Username y la contraseña con Hash
+			INSERT INTO TbUsuarios (Username, Contraseña, IDContacto)
+			VALUES (@UsernameTbU, @HashContraseñaTbU, @Numerotel)
+		END
+	-- Obtener el IDUsuario basado en el Username
+		DECLARE @IDUsuario INT
+		SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE Username = @UsernameTbU)
+	-- Insertar datos en la tabla TbAdministrador
+		
+		INSERT INTO TbPacientes (Nombre, Apellido, FNacimiento, IDClinica, IDUsuario)
+		VALUES (@nombreTbP, @apellidoTbp,@fechadenaci,@IdTbCli, @IDUsuario)
+		END
+		
+END
 
+
+EXEC PDRegistrarpaciente 'Juan','CagaLindo','9-10-2001','52281','Juanes','contraseña', '+503 7689 6281';
+
+Select * from TbContactos;
+Select * from TbUsuarios;
+Select * from TbClinicas;
+Select * from TbPacientes;
+DROP Procedure PDRegistrarpaciente
 /*
 Desde aquí comienzan las vistas
 
