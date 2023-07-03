@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import androidx.navigation.ui.AppBarConfiguration
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +17,7 @@ class MainActivity : AppCompatActivity() {
             val intent: Intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.calendarioView,R.id.navigation_dashboard,R.id.navigation_home,R.id.navigation_notifications))
 
     }
 
