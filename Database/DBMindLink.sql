@@ -561,12 +561,50 @@ END
 
 EXEC PDRegistrarpaciente 'Juan','CagaLindo','9-10-2001','52281','Juanes','contraseña', '+503 7689 6281';
 
-Select * from TbContactos;
-Select * from TbUsuarios;
-Select * from TbClinicas;
-Select * from TbPacientes;
-DROP Procedure PDRegistrarpaciente
+--Select * from TbContactos;
+--Select * from TbUsuarios;
+--Select * from TbClinicas;
+--Select * from TbPacientes;
+--DROP Procedure PDRegistrarpaciente
+
+/*
+Aqui empieza el proceso para Crear o actualizar un usuario de tipo empleado:
+*/
+CREATE PROCEDURE PDCrearActualizarUsuario
+    @nombreUsuario VARCHAR(50),
+    @contraseña VARCHAR(50)
+AS
+BEGIN
+    -- Verificar si el usuario ya existe en la tabla
+    IF EXISTS (SELECT 1 FROM dbo.TbUsuarios WHERE UserName = @nombreUsuario)
+    BEGIN
+        -- Actualizar la contraseña existente
+        UPDATE dbo.TbUsuarios
+        SET Contraseña = CONVERT(VARBINARY(MAX), @contraseña)
+        WHERE UserName = @nombreUsuario
+    END
+    ELSE
+    BEGIN
+        -- Insertar un nuevo registro
+        INSERT INTO dbo.TbUsuarios (UserName, Contraseña)
+        VALUES (@nombreUsuario, CONVERT(VARBINARY(MAX), @contraseña))
+    END
+END
+
+
+EXEC CrearActualizarUsuario @nombreUsuario = 'ejemplo_usuario', @contraseña = 'ejemplo_contraseña';
+--- DROP Procedure PDCrearActualizarUsuario
 /*
 Desde aquí comienzan las vistas
 
 */
+--Esta vista es para ver el usuario, la contraseña y el cargo de un empleado
+CREATE VIEW VistaUsuarios
+AS
+SELECT u.UserName, u.Contraseña, t.Cargo
+FROM TbUsuarios u
+INNER JOIN TbTipoUsuarios t ON t.IDTipoUsuario = t.IDTipoUsuario
+
+--Esto es para seleccionar la vista:
+--SELECT * FROM VistaUsuarios
+-- DROP VIEW VistaUsuarios
