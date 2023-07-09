@@ -200,12 +200,12 @@
         android:id="@+id/imageView20"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+        app:layout_constraintBottom_toTopOf="@+id/btnCrearCuenta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.692"
+        app:layout_constraintVertical_bias="0.962"
         app:srcCompat="@drawable/rectangleuno" />
 
     <TextView
@@ -248,7 +248,7 @@
         app:layout_constraintVertical_bias="0.474" />
 
     <EditText
-        android:id="@+id/editTextText2"
+        android:id="@+id/txtNombre"
         android:layout_width="158dp"
         android:layout_height="36dp"
         android:layout_marginEnd="20dp"
@@ -262,7 +262,7 @@
         app:layout_constraintVertical_bias="0.435" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/txtApellidos"
         android:layout_width="158dp"
         android:layout_height="36dp"
         android:ems="10"
@@ -275,7 +275,7 @@
         app:layout_constraintVertical_bias="0.435" />
 
     <EditText
-        android:id="@+id/editTextDate"
+        android:id="@+id/txtNacimiento"
         android:layout_width="325dp"
         android:layout_height="40dp"
         android:layout_marginBottom="10dp"
@@ -301,7 +301,7 @@
         app:layout_constraintVertical_bias="0.545" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/txtIdClinica"
         android:layout_width="325dp"
         android:layout_height="40dp"
         android:layout_marginTop="15dp"
@@ -353,7 +353,7 @@
         app:layout_constraintVertical_bias="0.66999996" />
 
     <EditText
-        android:id="@+id/editTextPhone"
+        android:id="@+id/txtNumero"
         android:layout_width="325dp"
         android:layout_height="40dp"
         android:layout_marginTop="6dp"
@@ -366,7 +366,7 @@
         app:layout_constraintVertical_bias="0.706" />
 
     <EditText
-        android:id="@+id/editTextTextPassword2"
+        android:id="@+id/txtContraseña"
         android:layout_width="140dp"
         android:layout_height="36dp"
         android:layout_marginBottom="4dp"
@@ -380,7 +380,7 @@
         app:layout_constraintVertical_bias="0.65" />
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/txtUsuario"
         android:layout_width="140dp"
         android:layout_height="36dp"
         android:layout_marginBottom="4dp"
@@ -420,10 +420,11 @@
         app:srcCompat="@drawable/googlebutton" />
 
     <ImageButton
-        android:id="@+id/imageButton5"
+        android:id="@+id/btnCrearCuenta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background=" #646c7c "
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.494"
