@@ -119,7 +119,7 @@ Nombre varchar(90),
 Apellido varchar(90),
 Salario varbinary(max),
 FNacimiento date,
-DUI varchar(20) unique,
+DUI varchar(20),
 IDTipoUsuario int,
 IDActividadLaboral int,
 IDGenero int,
@@ -132,7 +132,7 @@ Nombre varchar(90),
 Apellido varchar(90),
 Salario varbinary(max),
 FNacimiento date,
-DUI varchar(20) unique,
+DUI varchar(20),
 IDTipoUsuario int,
 IDActividadLaboral int,
 IDGenero int,
@@ -199,7 +199,24 @@ IDMedicamento int identity(1,1) primary key,
 NombreMedicamento varchar(500)
 );
 
+-- Aquí empiezan los unique's para que existan valores nulos repeditos en caso que el usuario no llene una de las preguntas de algun formulario
+CREATE UNIQUE INDEX TbCont_Correo ON TbContactos (Correo)
+WHERE Correo IS NOT NULL
 
+CREATE UNIQUE INDEX TbCont_NumTelefonico ON TbContactos (NumTelefonico)
+WHERE NumTelefonico IS NOT NULL
+
+CREATE UNIQUE INDEX TbAdministrador_DUI ON TbAdministrador (DUI)
+WHERE DUI IS NOT NULL
+
+CREATE UNIQUE INDEX TbPacientes_DUI ON TbPacientes (DUI)
+WHERE DUI IS NOT NULL
+
+CREATE UNIQUE INDEX TbSecretaria_DUI ON TbSecretaria (DUI)
+WHERE DUI IS NOT NULL
+
+CREATE UNIQUE INDEX TbTerapeutas_DUI ON TbTerapeutas (DUI)
+WHERE DUI IS NOT NULL
 --Insert into TbAdministrador 
 --Select * from TbMedicamentos
 
@@ -375,10 +392,12 @@ BEGIN
     BEGIN
 	-- Con esto declaramos la variable que contendra el Hash
 		DECLARE @HashContraseñaTbU VARBINARY (64);
+		DECLARE @newHash VARBINARY(64);
 		SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @ContraseñaTbU);
+		SET @newHash = HASHBYTES('SHA2_256', @HashContraseñaTbU);
     -- Con las dos lineas de abajo mandamos a almacenar el Username y la contraseña con Hash
 		INSERT INTO TbUsuarios (Username, Contraseña)
-        VALUES (@UsernameTbU, @HashContraseñaTbU)
+        VALUES (@UsernameTbU, @newHash)
     END
 	-- Obtener el IDUsuario basado en el Username
     DECLARE @IDUsuario INT
@@ -394,9 +413,8 @@ EXEC PDRegistrarAdmin 'Orlando', 'Pepito', 'Contraseña', '52281'
 /* esto es para comprobar que el PDResgistrarAdmin funciona jejeje
 Drop Procedure PDRegistrarAdmin
 
-
-Delete TbUsuarios
 Delete TbAdministrador
+Delete TbUsuarios
 Delete TbClinicas
  
 	esto es para reiniciar los PK en 0
@@ -411,9 +429,12 @@ Contraseña varbinary(64),
 FotoPerfil image,
 IDContacto int
 );
-Select * from TbUsuarios
 Select * from TbAdministrador
 Select * from TbClinicas
+Select * from TbUsuarios
+Select * from TbSecretaria
+Insert into TbUsuarios values ('JuanaGalindo', '');
+Insert into TbSecretaria values ('Juana','','','','','');
 */
 
 --Aqui empieza el proceso para logear todo tipo de usuario, admin, empleado, usuario
@@ -450,13 +471,15 @@ BEGIN
         -- Con esto declaramos la variable que contendrá el Hash
         DECLARE @HashContraseñaTbU VARBINARY(64);
         DECLARE @Contraseñareal VARBINARY(64);
+		DECLARE @newHash VARBINARY(64);
 
         SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @ContraseñaIngresado);
+		SET @newHash = HASHBYTES('SHA2_256', @HashContraseñaTbU);
         SET @Contraseñareal = (SELECT Contraseña FROM TbUsuarios WHERE IDUsuario = @IDUsuario);
 	--	PRINT @HashContraseñaTbU
 		--PRINT @Contraseñareal
         -- Con las líneas de abajo, veremos si la contraseña mandada ya hasheada coincide con la registrada
-        IF (@HashContraseñaTbU = @Contraseñareal)
+        IF (@newHash = @Contraseñareal)
         BEGIN
 		
             IF (@IDUsuario = @AdminExist)
@@ -497,7 +520,7 @@ END
 
 DECLARE @resultado INT;
 DECLARE @ventana INT;
-EXEC PDLogear 'Guayito', 'Contraseña', @ventana OUTPUT, @resultado OUTPUT;
+EXEC PDLogear 'Guayito', 'Papitas fritas', @ventana OUTPUT, @resultado OUTPUT;
 SELECT @resultado AS acceso;
 SELECT @ventana AS abrirventana;
 
@@ -538,14 +561,16 @@ BEGIN
 			BEGIN
 			-- Con esto declaramos la variable que contendra el Hash
 			DECLARE @HashContraseñaTbU VARBINARY (64);
+			DECLARE @newHash VARBINARY (64);
 			SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @ContraseñaTbU);
+			SET @newHash = HASHBYTES('SHA2_256', @HashContraseñaTbU);
 			INSERT INTO TbContactos (NumTelefonico)
 			VALUES (@Numtel)
 			DECLARE @Numerotel INT
 			SET @Numerotel = (SELECT IDContacto FROM TbContactos WHERE @NumTel = @Numerotel)
 			-- Con las dos lineas de abajo mandamos a almacenar el Username y la contraseña con Hash
 			INSERT INTO TbUsuarios (Username, Contraseña, IDContacto)
-			VALUES (@UsernameTbU, @HashContraseñaTbU, @Numerotel)
+			VALUES (@UsernameTbU, @newHash, @Numerotel)
 		END
 	-- Obtener el IDUsuario basado en el Username
 		DECLARE @IDUsuario INT
@@ -590,10 +615,85 @@ BEGIN
         VALUES (@nombreUsuario, CONVERT(VARBINARY(MAX), @contraseña))
     END
 END
-
-
+/*
+Esto nada más lo hice pa entender cómo se conecta un Foreign key a una registro existente
+INSERT INTO TbContactos Values ('guayito.palom0@gmail.com','69839847')
+Select * from TbContactos
+UPDATE TbUsuarios SET IDContacto = 1 WHERE UserName = 'Guayito'
+SELECT * FROM TbUsuarios where UserName = 'Guayito'
 EXEC CrearActualizarUsuario @nombreUsuario = 'ejemplo_usuario', @contraseña = 'ejemplo_contraseña';
 --- DROP Procedure PDCrearActualizarUsuario
+*/
+
+/*
+El siguiente proceso es para solo ACTUALIZAR la contraseña de los usuarios basandonos en su correo electronico, más no crear usuarios, solo actualizar
+Basicamente esta hecho para recuperacion de contraseña por medio del correo electronico
+*/
+CREATE PROCEDURE PDActualizarContraGmail
+    @Correo VARCHAR(300),
+    @contraseña VARCHAR(50)
+AS
+BEGIN
+    -- Verificar si el usuario ya existe en la tabla
+	
+    IF EXISTS (SELECT 1 FROM dbo.TbContactos WHERE Correo = @Correo)
+    BEGIN
+	DECLARE @IDContacto INT;
+	SET @IDContacto =  (SELECT IDContacto FROM TbContactos WHERE Correo = @Correo)
+	DECLARE @IDUsuario INT;
+	SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE IDContacto = @IDContacto)
+        -- Actualizar la contraseña existente
+		DECLARE @HashContraseñaTbU VARBINARY (64);
+		DECLARE @newHash VARBINARY (64);
+		SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @contraseña);
+		SET @newHash = HASHBYTES('SHA2_256', @HashContraseñaTbU);
+
+        UPDATE dbo.TbUsuarios
+		SET Contraseña = @newHash
+        WHERE IDUsuario = @IDUsuario
+    END
+	ELSE 
+	BEGIN
+		PRINT 'ta equivocado'
+	END
+END
+
+Exec PDActualizarContraGmail'guayito.palom0@gmail.com', 'Melocoton';
+SELECT * from TbUsuarios
+
+/*
+El siguiente ploceso es para cambiar la contraseña con el numero de telefono
+*/
+CREATE PROCEDURE PDActualizarContraNum
+    @Num VARCHAR(50),
+    @contraseña VARCHAR(50)
+AS
+BEGIN
+    -- Verificar si el usuario ya existe en la tabla
+	
+    IF EXISTS (SELECT 1 FROM dbo.TbContactos WHERE NumTelefonico = @Num)
+    BEGIN
+	DECLARE @IDContacto INT;
+	SET @IDContacto =  (SELECT IDContacto FROM TbContactos WHERE NumTelefonico = @Num)
+	DECLARE @IDUsuario INT;
+	SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE IDContacto = @IDContacto)
+        -- Actualizar la contraseña existente
+		DECLARE @HashContraseñaTbU VARBINARY (64);
+		DECLARE @newHash VARBINARY (64);
+		SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @contraseña);
+		SET @newHash = HASHBYTES('SHA2_256', @HashContraseñaTbU);
+
+        UPDATE dbo.TbUsuarios
+		SET Contraseña = @newHash
+        WHERE IDUsuario = @IDUsuario
+    END
+	ELSE 
+	BEGIN
+		PRINT 'ta equivocado'
+	END
+END
+
+EXEC PDActualizarContraNum '69839847','Papitaaaaa'
 /*
 Desde aquí comienzan las vistas
 
