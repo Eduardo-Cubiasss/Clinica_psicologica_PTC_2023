@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import java.sql.Connection
@@ -37,8 +38,15 @@ class Login : AppCompatActivity() {
 
         }
 
-            /*
+        val btnIniciarSesion = findViewById<ImageButton>(R.id.btnIniciarSesion)
 
+        btnIniciarSesion.setOnClickListener {
+            val intent: Intent = Intent(this, LoginInicio::class.java)
+            startActivity(intent)
+
+        }
+
+        /*
                     Username = findViewById(R.id.Usuario)
                     Password = findViewById(R.id.Contraseña)
                     btnIniciarSesion = findViewById(R.id.btnIniciarSesion)
@@ -71,10 +79,9 @@ class Login : AppCompatActivity() {
             private fun validateLogin(username: String, password: String): Boolean {
                 var connection: Connection? = null
 
-
                 val serverName = "192.168.0.9:50535"
                 val dbName = "dbMindLink"
-                val username = "user1"
+                val username = "sa"
                 val password = "user1"
 
                 try {
@@ -84,8 +91,8 @@ class Login : AppCompatActivity() {
                     connection = DriverManager.getConnection(url, username, password)
 
                     // Realizar la consulta para validar los datos de inicio de sesión
-                    val query = conexionSQL.dbConn()?.prepareStatement("EXEC PDregistrarpacientes(?,?")!!
-                    query.setString(1, txtNombre.text.toString())
+                    val query = conexionSQL.dbConn()?.prepareStatement("EXEC PDLogear(?,?")!!
+                    query.setString(1, txtUsuario.text.toString())
                     query.setString(2, txtContraseña.text.toString())
                     query.executeQuery()
 
@@ -105,8 +112,8 @@ class Login : AppCompatActivity() {
 
                  //no estoy seguro de esto
 
-                 */
 
+            */
 
     }
 }

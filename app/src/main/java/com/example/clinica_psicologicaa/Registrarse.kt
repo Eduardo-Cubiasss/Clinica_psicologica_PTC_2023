@@ -2,14 +2,14 @@ package com.example.clinica_psicologicaa
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import org.w3c.dom.Text
-import java.sql.DriverManager
+import androidx.appcompat.app.AppCompatActivity
 import java.sql.PreparedStatement
+import java.util.Date
+
 
 lateinit var txtNombre : EditText
 lateinit var txtApellidos : EditText
@@ -19,9 +19,7 @@ lateinit var txtContraseña : EditText
 lateinit var txtNumero : EditText
 lateinit var txtUsuario : EditText
 
-
 class Registrarse : AppCompatActivity() {
-
 
     private var conexionSQL = ConexionSQL()
 
@@ -56,13 +54,14 @@ class Registrarse : AppCompatActivity() {
                 val password = txtContraseña.text.toString()
                 val Telefonos = txtNumero.text.toString()
 
-                val addPersona:PreparedStatement = conexionSQL.dbConn()?.prepareStatement("EXEC PDregistrarpacientes(?,?,?,?,?,?,?)")!!
-                addPersona.setString(1, txtNombre.text.toString())
-                addPersona.setString(2, txtApellidos.text.toString())
-                addPersona.setString(3, txtNacimiento.text.toString())
-                addPersona.setString(4, txtIdClinica.text.toString())
-                addPersona.setString(5, txtContraseña.text.toString())
-                addPersona.setString(7, txtNumero.text.toString())
+                val addPersona:PreparedStatement = conexionSQL.dbConn()?.prepareStatement("EXEC PDRegistrarpaciente(?,?,?,?,?,?,?)")!!
+                addPersona.setString(1, Nombres)
+                addPersona.setString(2, Apellidos)
+                addPersona.setString(3, FechaNacimiento)
+                addPersona.setString(4, IdClinica)
+                addPersona.setString(5, usuarios)
+                addPersona.setString(6, password)
+                addPersona.setString(7, Telefonos)
 
                 addPersona.executeUpdate()
 
