@@ -126,8 +126,8 @@
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="39dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
@@ -219,7 +219,7 @@
         app:layout_constraintHorizontal_bias="0.087"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.405" />
+        app:layout_constraintVertical_bias="0.394" />
 
     <TextView
         android:id="@+id/textView8"
@@ -229,10 +229,10 @@
         android:textColor="#a4a4a4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.612"
+        app:layout_constraintHorizontal_bias="0.614"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.404" />
+        app:layout_constraintVertical_bias="0.394" />
 
     <TextView
         android:id="@+id/textView9"
@@ -249,30 +249,30 @@
 
     <EditText
         android:id="@+id/txtNombre"
-        android:layout_width="158dp"
-        android:layout_height="36dp"
+        android:layout_width="155dp"
+        android:layout_height="41dp"
         android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.435" />
+        app:layout_constraintVertical_bias="0.431" />
 
     <EditText
         android:id="@+id/txtApellidos"
-        android:layout_width="158dp"
-        android:layout_height="36dp"
+        android:layout_width="155dp"
+        android:layout_height="41dp"
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintHorizontal_bias="0.847"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.435" />
+        app:layout_constraintVertical_bias="0.432" />
 
     <EditText
         android:id="@+id/txtNacimiento"
@@ -355,7 +355,7 @@
     <EditText
         android:id="@+id/txtNumero"
         android:layout_width="325dp"
-        android:layout_height="40dp"
+        android:layout_height="41dp"
         android:layout_marginTop="6dp"
         android:ems="10"
         android:inputType="phone"
@@ -363,12 +363,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.706" />
+        app:layout_constraintVertical_bias="0.707" />
 
     <EditText
         android:id="@+id/txtContraseña"
         android:layout_width="140dp"
-        android:layout_height="36dp"
+        android:layout_height="41dp"
         android:layout_marginBottom="4dp"
         android:ems="10"
         android:inputType="textPassword"
@@ -377,12 +377,12 @@
         app:layout_constraintHorizontal_bias="0.885"
         app:layout_constraintStart_toStartOf="@+id/imageView7"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintVertical_bias="0.646" />
 
     <EditText
         android:id="@+id/txtUsuario"
         android:layout_width="140dp"
-        android:layout_height="36dp"
+        android:layout_height="41dp"
         android:layout_marginBottom="4dp"
         android:ems="10"
         android:inputType="text"
@@ -391,7 +391,7 @@
         app:layout_constraintHorizontal_bias="0.228"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.65" />
+        app:layout_constraintVertical_bias="0.647" />
 
     <TextView
         android:id="@+id/btnOiniciarsesion"
@@ -413,10 +413,10 @@
         android:backgroundTint="#5c6c7c"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.518"
+        app:layout_constraintHorizontal_bias="0.554"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976"
+        app:layout_constraintVertical_bias="0.98"
         app:srcCompat="@drawable/googlebutton" />
 
     <ImageButton
