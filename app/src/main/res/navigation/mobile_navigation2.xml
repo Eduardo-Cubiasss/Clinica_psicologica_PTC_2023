@@ -3,23 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation2"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_calendario">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_calendario"
         android:name="com.example.clinica_psicologicaa.ui.home.HomeFragment"
-        android:label="@string/title_home"
+        android:label="Calendario"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.clinica_psicologicaa.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:label="Realizar una cita"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.clinica_psicologicaa.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:label="Cerrar sesion"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/materiales"
+        android:name="com.example.clinica_psicologicaa.Materiales"
+        android:label="Materiales"
+        tools:layout="@layout/fragment_materiales" />
+    <fragment
+        android:id="@+id/misnotas"
+        android:name="com.example.clinica_psicologicaa.Misnotas"
+        android:label="Mis notas"
+        tools:layout="@layout/fragment_misnotas" />
 </navigation>
