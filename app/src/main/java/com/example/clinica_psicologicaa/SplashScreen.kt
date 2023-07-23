@@ -3,9 +3,11 @@ package com.example.clinica_psicologicaa
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class CerrarSesion : AppCompatActivity() {
+class SplashScreen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cerrar_sesion)
+        setContentView(R.layout.activity_splash_screen)
+
+
     }
 }

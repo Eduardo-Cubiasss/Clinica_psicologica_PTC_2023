@@ -15,35 +15,27 @@
         android:theme="@style/Theme.Design.NoActionBar"
         tools:targetApi="31">
         <activity
-            android:name=".ViewCalendar"
+            android:name=".PrimerUso"
             android:exported="false" />
         <activity
-            android:name=".MisNotas"
+            android:name=".ComentariosXP"
             android:exported="false" />
         <activity
-            android:name=".Materiales"
+            android:name=".MiPerfil"
             android:exported="false" />
         <activity
-            android:name=".CerrarSesion"
-            android:exported="false" />
+            android:name=".PInicial"
+            android:exported="false"
+            android:label="@string/title_activity_pinicial" />
         <activity
-            android:name=".RealizarCita"
-            android:exported="false" />
-        <activity
-            android:name=".DocsApoyo"
-            android:exported="false" />
+            android:name=".Inicio2"
+            android:exported="false"
+            android:label="@string/title_activity_inicio2" />
         <activity
             android:name=".recordar_passwordpunto2"
             android:exported="false" />
         <activity
             android:name=".recordar_passwordpunto1"
-            android:exported="false" />
-        <activity
-            android:name=".Inicio"
-            android:exported="false"
-            android:label="@string/title_activity_inicio" />
-        <activity
-            android:name=".LoginInicio"
             android:exported="false" />
         <activity
             android:name=".recordar_password2"
@@ -56,7 +48,7 @@
             android:exported="false" />
         <activity
             android:name=".Login"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
