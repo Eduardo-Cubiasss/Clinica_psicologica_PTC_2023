@@ -1,11 +1,11 @@
-package com.example.clinica_psicologicaa
+package com.example.clinicapsicologica2023expo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class DocsApoyo : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_docs_apoyo)
+        setContentView(R.layout.activity_main)
     }
 }

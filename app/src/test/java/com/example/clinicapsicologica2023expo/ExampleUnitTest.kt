@@ -1,4 +1,4 @@
-package com.example.clinica_psicologicaa
+package com.example.clinicapsicologica2023expo
 
 import org.junit.Test
 

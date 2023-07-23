@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "clinica_psicologicaa"
+rootProject.name = "ClinicaPsicologica2023expo"
 include ':app'
