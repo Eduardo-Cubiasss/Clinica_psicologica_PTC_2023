@@ -7,21 +7,21 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.clinica_psicologicaa.databinding.ActivityPinicialBinding
+import com.example.clinica_psicologicaa.databinding.ActivityPinicial3Binding
 
-class PInicial : AppCompatActivity() {
+class Pinicial3 : AppCompatActivity() {
 
-    private lateinit var binding: ActivityPinicialBinding
+    private lateinit var binding: ActivityPinicial3Binding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityPinicialBinding.inflate(layoutInflater)
+        binding = ActivityPinicial3Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val navView: BottomNavigationView = binding.navView
 
-        val navController = findNavController(R.id.nav_host_fragment_activity_pinicial)
+        val navController = findNavController(R.id.nav_host_fragment_activity_pinicial3)
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
