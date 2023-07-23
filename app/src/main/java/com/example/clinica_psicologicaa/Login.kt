@@ -41,7 +41,7 @@ class Login : AppCompatActivity() {
         val btnIniciarSesion = findViewById<ImageButton>(R.id.btnIniciarSesion)
 
         btnIniciarSesion.setOnClickListener {
-            val intent: Intent = Intent(this,PInicial ::class.java)
+            val intent: Intent = Intent(this,Pinicial3 ::class.java)
             startActivity(intent)
 
         }
