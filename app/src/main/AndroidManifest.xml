@@ -13,6 +13,10 @@
         android:theme="@style/Theme.MindLink_celular"
         tools:targetApi="31">
         <activity
+            android:name=".PantallaInicial"
+            android:exported="false"
+            android:label="@string/title_activity_pantalla_inicial" />
+        <activity
             android:name=".recuperarContra2dos"
             android:exported="false" />
         <activity

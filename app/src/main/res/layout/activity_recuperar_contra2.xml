@@ -50,11 +50,12 @@
         android:id="@+id/imageView51"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView35"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.154"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView35"
+        app:layout_constraintTop_toTopOf="@+id/imageView42"
         app:layout_constraintVertical_bias="0.41"
         app:srcCompat="@drawable/buzon" />
 
@@ -64,12 +65,12 @@
         android:layout_height="wrap_content"
         android:text="Número telefónico registrado"
         android:textColor="#a4a4a4"
-        app:layout_constraintBottom_toTopOf="@+id/imageView35"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView42"
         app:layout_constraintEnd_toEndOf="@+id/imageView32"
         app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView25"
-        app:layout_constraintVertical_bias="0.989" />
+        app:layout_constraintTop_toTopOf="@+id/imageView42"
+        app:layout_constraintVertical_bias="0.34" />
 
     <ImageView
         android:id="@+id/imageView38"
@@ -107,8 +108,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView42"
-        app:layout_constraintVertical_bias="0.525"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.072"
         app:srcCompat="@drawable/saly16"
         tools:ignore="UseAppTint" />
 
@@ -122,8 +123,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView42"
-        app:layout_constraintVertical_bias="0.617"
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.060000002"
         app:srcCompat="@drawable/frontshapes1"
         tools:ignore="UseAppTint" />
 
@@ -131,31 +132,34 @@
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="560dp"
         android:text="Quiérete más de lo que quieres  "
         android:textColor="#a4a4a4"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView35"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView24"
-        app:layout_constraintVertical_bias="0.059" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.154" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="580dp"
         android:text="Recupera tu cuenta"
         android:textColor="#ffffff"
         android:textSize="40sp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView35"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView42"
-        app:layout_constraintVertical_bias="0.33" />
+        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintVertical_bias="0.077" />
 
     <TextView
-        android:id="@+id/txtRegistrarte2"
+        android:id="@+id/textView26"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Registrate"
@@ -196,17 +200,17 @@
         app:srcCompat="@drawable/flechaderecha" />
 
     <TextView
-        android:id="@+id/txtYaRecordaste"
+        android:id="@+id/textView28"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Ya recordaste la contraseña? Inicia sesión"
         android:textColor="#a4a4a4"
-        app:layout_constraintBottom_toTopOf="@+id/imageButton7"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.654"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView35"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintTop_toTopOf="@+id/imageView42"
+        app:layout_constraintVertical_bias="0.49" />
 
     <ImageButton
         android:id="@+id/imageButton7"
