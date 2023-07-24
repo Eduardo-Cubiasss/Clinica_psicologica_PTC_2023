@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/calendarioid"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="Calendario" />
+
+    <item
+        android:id="@+id/realizarcitaid"
+        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:title="Realizar cita" />
+
+    <item
+        android:id="@+id/cerrarsesionid"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="Cerrar Sesión" />
+
+    <item
+        android:id="@+id/materialesid"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="Materiales" />
+
+    <item
+        android:id="@+id/misnotasid1"
+        android:icon="@drawable/ic_notifications_black_24dp"
+        android:title="Mis notas" />
+
+</menu>

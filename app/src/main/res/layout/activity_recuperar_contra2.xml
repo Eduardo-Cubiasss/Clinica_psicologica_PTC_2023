@@ -59,18 +59,19 @@
         app:layout_constraintVertical_bias="0.41"
         app:srcCompat="@drawable/buzon" />
 
-    <TextView
-        android:id="@+id/textView27"
+    <ImageButton
+        android:id="@+id/imageButton7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Número telefónico registrado"
-        android:textColor="#a4a4a4"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView42"
-        app:layout_constraintEnd_toEndOf="@+id/imageView32"
-        app:layout_constraintHorizontal_bias="0.21"
+        android:background=" #646c7c "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView42"
-        app:layout_constraintVertical_bias="0.34" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.75"
+        app:srcCompat="@drawable/siguiente2"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <ImageView
         android:id="@+id/imageView38"
@@ -128,6 +129,34 @@
         app:srcCompat="@drawable/frontshapes1"
         tools:ignore="UseAppTint" />
 
+    <ImageView
+        android:id="@+id/imageView46"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="164dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.158"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView11"
+        app:layout_constraintVertical_bias="0.837"
+        app:srcCompat="@drawable/flechaizquierda" />
+
+    <ImageView
+        android:id="@+id/imageView43"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="225dp"
+        android:layout_marginBottom="164dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView11"
+        app:layout_constraintVertical_bias="0.837"
+        app:srcCompat="@drawable/flechaderecha" />
+
     <TextView
         android:id="@+id/textView25"
         android:layout_width="wrap_content"
@@ -171,34 +200,6 @@
         app:layout_constraintTop_toTopOf="@+id/imageView42"
         app:layout_constraintVertical_bias="0.756" />
 
-    <ImageView
-        android:id="@+id/imageView46"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginBottom="164dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.158"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView11"
-        app:layout_constraintVertical_bias="0.837"
-        app:srcCompat="@drawable/flechaizquierda" />
-
-    <ImageView
-        android:id="@+id/imageView43"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="225dp"
-        android:layout_marginBottom="164dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.511"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView11"
-        app:layout_constraintVertical_bias="0.837"
-        app:srcCompat="@drawable/flechaderecha" />
-
     <TextView
         android:id="@+id/textView28"
         android:layout_width="wrap_content"
@@ -212,16 +213,17 @@
         app:layout_constraintTop_toTopOf="@+id/imageView42"
         app:layout_constraintVertical_bias="0.49" />
 
-    <ImageButton
-        android:id="@+id/imageButton7"
+    <TextView
+        android:id="@+id/textView27"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background=" #646c7c "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        android:text="Número telefónico registrado"
+        android:textColor="#a4a4a4"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView42"
+        app:layout_constraintEnd_toEndOf="@+id/imageView32"
+        app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.75"
-        app:srcCompat="@drawable/siguiente2" />
+        app:layout_constraintTop_toTopOf="@+id/imageView42"
+        app:layout_constraintVertical_bias="0.34" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
