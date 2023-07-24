@@ -8,7 +8,7 @@
     tools:context=".RecuperarContra2">
 
     <ImageView
-        android:id="@+id/imageView42"
+        android:id="@+id/txtRegistrarte2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="216dp"
@@ -55,7 +55,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.154"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView42"
+        app:layout_constraintTop_toTopOf="@+id/txtRegistrarte2"
         app:layout_constraintVertical_bias="0.41"
         app:srcCompat="@drawable/buzon" />
 
@@ -65,11 +65,11 @@
         android:layout_height="wrap_content"
         android:text="Número telefónico registrado"
         android:textColor="#a4a4a4"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView42"
+        app:layout_constraintBottom_toBottomOf="@+id/txtRegistrarte2"
         app:layout_constraintEnd_toEndOf="@+id/imageView32"
         app:layout_constraintHorizontal_bias="0.21"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView42"
+        app:layout_constraintTop_toTopOf="@+id/txtRegistrarte2"
         app:layout_constraintVertical_bias="0.34" />
 
     <ImageView
@@ -168,7 +168,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView42"
+        app:layout_constraintTop_toTopOf="@+id/txtRegistrarte2"
         app:layout_constraintVertical_bias="0.756" />
 
     <ImageView
@@ -200,7 +200,7 @@
         app:srcCompat="@drawable/flechaderecha" />
 
     <TextView
-        android:id="@+id/textView28"
+        android:id="@+id/txtYaRecordaste"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Ya recordaste la contraseña? Inicia sesión"
@@ -209,7 +209,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.654"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView42"
+        app:layout_constraintTop_toTopOf="@+id/txtRegistrarte2"
         app:layout_constraintVertical_bias="0.49" />
 
     <ImageButton

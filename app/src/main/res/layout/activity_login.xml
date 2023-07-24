@@ -191,7 +191,7 @@
         app:layout_constraintVertical_bias="0.407" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtRecordar1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿No recuerdas tu contraseña?"
@@ -205,7 +205,7 @@
         app:layout_constraintVertical_bias="0.541" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/txtRegistrarte"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
