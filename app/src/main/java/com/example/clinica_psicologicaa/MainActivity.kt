@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
             val intent: Intent = Intent(this, Login::class.java)
             startActivity(intent)
         }
-        val appBarConfiguration = AppBarConfiguration(setOf(R.id.viewCalendar,R.id.realizarCita,R.id.cerrarSesion,R.id.materiales2,R.id.misNotas))
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.calendarioView,R.id.navigation_dashboard,R.id.navigation_home,R.id.navigation_notifications))
 
     }
 
