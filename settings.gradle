@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "MindLink_celular"
+rootProject.name = "clinica_psicologicaa"
 include ':app'

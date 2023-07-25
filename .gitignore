@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+app/src/main/java/com/example/clinica_psicologicaa/Registrarse.kt
+app/src/main/res/layout/activity_inicio.xml
+*.xml

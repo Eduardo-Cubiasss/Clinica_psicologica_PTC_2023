@@ -2,28 +2,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/calendarioid"
-        android:icon="@drawable/calendariog"
+        android:id="@+id/viewCalendar"
+        android:icon="@drawable/calendarp"
         android:title="Calendario" />
 
     <item
-        android:id="@+id/realizarcitaid"
-        android:icon="@drawable/carag"
-        android:title="Realizar cita" />
+        android:id="@+id/realizarCita"
+        android:icon="@drawable/selflovep"
+        android:title="Realizar una cita" />
 
     <item
-        android:id="@+id/cerrarsesionid"
-        android:icon="@drawable/cerebrocerrar"
-        android:title="Cerrar Sesión" />
+        android:id="@+id/cerrarSesion"
+        android:icon="@drawable/cerebrocerrarsesion"
+        android:title="Cerrar sesión" />
 
     <item
-        android:id="@+id/materialesid"
-        android:icon="@drawable/materiales"
+        android:id="@+id/materiales2"
+        android:icon="@drawable/bookp"
         android:title="Materiales" />
 
     <item
-        android:id="@+id/misnotasid1"
-        android:icon="@drawable/agendag"
+        android:id="@+id/misNotas"
+        android:icon="@drawable/notesp"
         android:title="Mis notas" />
 
 </menu>
