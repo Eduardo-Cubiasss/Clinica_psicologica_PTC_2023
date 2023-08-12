@@ -8,10 +8,10 @@ import java.sql.SQLException
 
 class ConexionSQL {
     //Variables para la cadena de conexión
-    private val ip="10.20.1.64:59254"
+    private val ip="192.168.0.9:53266"
     private val db="dbMindLink"
-    private val username="sa"
-    private val password="itr2023"
+    private val username="user1"
+    private val password="user1"
 
     //Función de conexión
     fun dbConn(): Connection? {
