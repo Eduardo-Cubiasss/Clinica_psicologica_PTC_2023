@@ -89,14 +89,14 @@ Create table TbClinicas(
 IDClinica Varchar(5) primary key,
 NombreClinica varchar(300),
 Ubicacion Varchar(1000), 
-DueÃ±o nvarchar(100),
+Dueño nvarchar(100),
 Descripcion varchar(400),
 Logo image
 );
 Create table TbUsuarios(
 IDUsuario int identity(1,1) primary key,
 UserName varchar(50) unique,
-ContraseÃ±a varbinary(64),
+Contraseña varbinary(64),
 FotoPerfil image,
 IDContacto int
 );
@@ -199,7 +199,7 @@ IDMedicamento int identity(1,1) primary key,
 NombreMedicamento varchar(500)
 );
 
--- AquÃ­ empiezan los unique's para que existan valores nulos repeditos en caso que el usuario no llene una de las preguntas de algun formulario
+-- Aquí empiezan los unique's para que existan valores nulos repeditos en caso que el usuario no llene una de las preguntas de algun formulario
 CREATE UNIQUE INDEX TbCont_Correo ON TbContactos (Correo)
 WHERE Correo IS NOT NULL
 
@@ -228,7 +228,7 @@ Foreign key (IDSecretaria) References TbSecretaria(IDSecretaria);
 
 
 /*
-Hasta aquÃ­ va bien (ya lo probe)
+Hasta aquí va bien (ya lo probe)
 */
 Alter table TbAnuncio Add constraint fk_IDAdministrador_TbAnun
 Foreign key (IDAdministrador) References TbAdministrador(IDAdministrador);
@@ -272,7 +272,7 @@ Foreign key (IDPregunta) References TbPreguntas(IDPregunta);
 Alter table TbLlaves Add constraint fk_IDPrueba_TBLlav
 Foreign key (IDPrueba) References TbPruebas(IDPrueba);
 /*
-Hasta aquÃ­ good
+Hasta aquí good
 */
 Alter table TbResultados Add constraint fk_IDPrueba_TbResul
 Foreign key (IDPrueba) References TbPruebas(IDPrueba);
@@ -370,12 +370,12 @@ Ya esta bien aaaa
 */
 
 /*
-Desde aquÃ­ comienzan los procesos almacenados
+Desde aquí comienzan los procesos almacenados
 */
 CREATE PROCEDURE PDRegistrarAdmin
     @nombreTbA VARCHAR(90),
     @UsernameTbU VARCHAR(50),
-    @ContraseÃ±aTbU VARCHAR(90),
+    @ContraseñaTbU VARCHAR(90),
 	@IdTbCli VARCHAR(5)
 AS
 BEGIN
@@ -391,12 +391,12 @@ BEGIN
     IF NOT EXISTS (SELECT 1 FROM TbUsuarios WHERE UserName = @UsernameTbU)
     BEGIN
 	-- Con esto declaramos la variable que contendra el Hash
-		DECLARE @HashContraseÃ±aTbU VARBINARY (64);
+		DECLARE @HashContraseñaTbU VARBINARY (64);
 		DECLARE @newHash VARBINARY(64);
-		SET @HashContraseÃ±aTbU = HASHBYTES('SHA2_256', @ContraseÃ±aTbU);
-		SET @newHash = HASHBYTES('SHA2_256', @HashContraseÃ±aTbU);
-    -- Con las dos lineas de abajo mandamos a almacenar el Username y la contraseÃ±a con Hash
-		INSERT INTO TbUsuarios (Username, ContraseÃ±a)
+		SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @ContraseñaTbU);
+		SET @newHash = HASHBYTES('SHA2_256', @HashContraseñaTbU);
+    -- Con las dos lineas de abajo mandamos a almacenar el Username y la contraseña con Hash
+		INSERT INTO TbUsuarios (Username, Contraseña)
         VALUES (@UsernameTbU, @newHash)
     END
 	-- Obtener el IDUsuario basado en el Username
@@ -408,11 +408,14 @@ BEGIN
 
 END
 
-EXEC PDRegistrarAdmin 'Eduardo RenÃ©', 'Guayito', 'ContraseÃ±a', '52281'
-EXEC PDRegistrarAdmin 'Orlando', 'Pepito', 'ContraseÃ±a', '52281'
+EXEC PDRegistrarAdmin 'Eduardo René', 'Guayito', 'Contraseña', '52281'
+EXEC PDRegistrarAdmin 'Orlando', 'Pepito', 'Contraseña', '52281'
 /* esto es para comprobar que el PDResgistrarAdmin funciona jejeje
 Drop Procedure PDRegistrarAdmin
 
+INSERT INTO TbContactos Values ('Guayito.palom0@gmail.com', '69839847')
+SELECT * FRom TbContactos
+INSERT INTO TbUsuarios IDContacto(1)
 Delete TbAdministrador
 Delete TbUsuarios
 Delete TbClinicas
@@ -425,7 +428,7 @@ DBCC CHECKIDENT ('TbClinicas', RESEED, 0);
 Create table TbUsuarios(
 IDUsuario int identity(1,1) primary key,
 UserName varchar(50),
-ContraseÃ±a varbinary(64),
+Contraseña varbinary(64),
 FotoPerfil image,
 IDContacto int
 );
@@ -439,14 +442,14 @@ Insert into TbSecretaria values ('Juana','','','','','');
 
 --Aqui empieza el proceso para logear todo tipo de usuario, admin, empleado, usuario
 
-CREATE PROCEDURE PDLogear
+ALTER PROCEDURE PDLogear
     @UsernameIngresado VARCHAR(50),
-    @ContraseÃ±aIngresado VARCHAR(90),
+    @ContraseñaIngresado VARCHAR(90),
     @abrirventana INT OUTPUT,
     @acceso INT OUTPUT
 AS
 BEGIN
-    -- Agrega la declaraciÃ³n de la variable @resultado y @ventana aquÃ­
+    -- Agrega la declaración de la variable @resultado y @ventana aquí
 	 DECLARE @ventana INT;
     DECLARE @resultado INT;
    
@@ -459,27 +462,28 @@ BEGIN
     DECLARE @TerapeExist INT;
 
     -- Con esto seleccionamos de cada tabla de cada nivel de usuario si existe un ID como el ingresado
-    SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE Username = @UsernameIngresado);
-    SET @username = (SELECT UserName FROM TbUsuarios WHERE IDUsuario = @IDUsuario);
-    SET @AdminExist = (SELECT IDUsuario FROM TbAdministrador WHERE IDUsuario = @IDUsuario);
-    SET @SecretExist = (SELECT IDUsuario FROM TbSecretaria WHERE IDUsuario = @IDUsuario);
-    SET @TerapeExist = (SELECT IDUsuario FROM TbTerapeutas WHERE IDUsuario = @IDUsuario);
+    SET @IDUsuario = (SELECT TOP 1 IDUsuario FROM TbUsuarios WHERE Username = @UsernameIngresado);
+	SET @username = (SELECT TOP 1 UserName FROM TbUsuarios WHERE IDUsuario = @IDUsuario);
+	SET @AdminExist = (SELECT TOP 1 IDUsuario FROM TbAdministrador WHERE IDUsuario = @IDUsuario);
+	SET @SecretExist = (SELECT TOP 1 IDUsuario FROM TbSecretaria WHERE IDUsuario = @IDUsuario);
+	SET @TerapeExist = (SELECT TOP 1 IDUsuario FROM TbTerapeutas WHERE IDUsuario = @IDUsuario);
+
 
     IF (@username = @UsernameIngresado)
     BEGIN
 	--SET @acceso = 1;
-        -- Con esto declaramos la variable que contendrÃ¡ el Hash
-        DECLARE @HashContraseÃ±aTbU VARBINARY(64);
-        DECLARE @ContraseÃ±areal VARBINARY(64);
+        -- Con esto declaramos la variable que contendrá el Hash
+        DECLARE @HashContraseñaTbU VARBINARY(64);
+        DECLARE @Contraseñareal VARBINARY(64);
 		DECLARE @newHash VARBINARY(64);
 
-        SET @HashContraseÃ±aTbU = HASHBYTES('SHA2_256', @ContraseÃ±aIngresado);
-		SET @newHash = HASHBYTES('SHA2_256', @HashContraseÃ±aTbU);
-        SET @ContraseÃ±areal = (SELECT ContraseÃ±a FROM TbUsuarios WHERE IDUsuario = @IDUsuario);
-	--	PRINT @HashContraseÃ±aTbU
-		--PRINT @ContraseÃ±areal
-        -- Con las lÃ­neas de abajo, veremos si la contraseÃ±a mandada ya hasheada coincide con la registrada
-        IF (@newHash = @ContraseÃ±areal)
+        SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @ContraseñaIngresado);
+		SET @newHash = HASHBYTES('SHA2_256', @HashContraseñaTbU);
+        SET @Contraseñareal = (SELECT Contraseña FROM TbUsuarios WHERE IDUsuario = @IDUsuario);
+	--	PRINT @HashContraseñaTbU
+		--PRINT @Contraseñareal
+        -- Con las líneas de abajo, veremos si la contraseña mandada ya hasheada coincide con la registrada
+        IF (@newHash = @Contraseñareal)
         BEGIN
 		
             IF (@IDUsuario = @AdminExist)
@@ -508,7 +512,7 @@ BEGIN
     ELSE
     BEGIN
         SET @resultado = 0;
-        SET @ventana = 0; -- AsignaciÃ³n para el caso en que el username no coincida
+        SET @ventana = 0; -- Asignación para el caso en que el username no coincida
     END
 
     SET @abrirventana = @ventana;
@@ -520,7 +524,7 @@ END
 
 DECLARE @resultado INT;
 DECLARE @ventana INT;
-EXEC PDLogear 'Guayito', 'ContraseÃ±a', @ventana OUTPUT, @resultado OUTPUT;
+EXEC PDLogear 'Guayito', 'Melocoton', @ventana OUTPUT, @resultado OUTPUT;
 SELECT @resultado AS acceso;
 SELECT @ventana AS abrirventana;
 
@@ -549,7 +553,7 @@ CREATE PROCEDURE PDRegistrarpaciente
 	@fechadenaci DATE,
 	@IdTbCli VARCHAR(5),
     @UsernameTbU VARCHAR(50),
-    @ContraseÃ±aTbU VARCHAR(90),
+    @ContraseñaTbU VARCHAR(90),
 	@Numtel nvarchar(14)
 AS
 BEGIN
@@ -562,16 +566,16 @@ BEGIN
 		 IF NOT EXISTS (SELECT 1 FROM TbUsuarios WHERE UserName = @UsernameTbU)
 			BEGIN
 			-- Con esto declaramos la variable que contendra el Hash
-			DECLARE @HashContraseÃ±aTbU VARBINARY (64);
+			DECLARE @HashContraseñaTbU VARBINARY (64);
 			DECLARE @newHash VARBINARY (64);
-			SET @HashContraseÃ±aTbU = HASHBYTES('SHA2_256', @ContraseÃ±aTbU);
-			SET @newHash = HASHBYTES('SHA2_256', @HashContraseÃ±aTbU);
+			SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @ContraseñaTbU);
+			SET @newHash = HASHBYTES('SHA2_256', @HashContraseñaTbU);
 			INSERT INTO TbContactos (NumTelefonico)
 			VALUES (@Numtel)
 			DECLARE @Numerotel NVARCHAR
 			SET @Numerotel = (SELECT IDContacto FROM TbContactos WHERE @NumTel = @Numerotel)
-			-- Con las dos lineas de abajo mandamos a almacenar el Username y la contraseÃ±a con Hash
-			INSERT INTO TbUsuarios (Username, ContraseÃ±a, IDContacto)
+			-- Con las dos lineas de abajo mandamos a almacenar el Username y la contraseña con Hash
+			INSERT INTO TbUsuarios (Username, Contraseña, IDContacto)
 			VALUES (@UsernameTbU, @newHash, @Numerotel)
 		END
 	-- Obtener el IDUsuario basado en el Username
@@ -586,8 +590,7 @@ BEGIN
 END
 
 
-EXEC PDRegistrarpaciente 'Luis','CagaLindo','9-10-2001','52281','Pepito','contraseÃ±a', ' 7689 6281';
-
+EXEC PDRegistrarpaciente 'Luis','CagaLindo','9-10-2001','52281','Pepito','contraseña', ' 7689 6281';
 --Select * from TbContactos;
 --Select * from TbUsuarios;
 --Select * from TbClinicas;
@@ -599,41 +602,45 @@ Aqui empieza el proceso para Crear o actualizar un usuario de tipo empleado:
 */
 CREATE PROCEDURE PDCrearActualizarUsuario
     @nombreUsuario VARCHAR(50),
-    @contraseÃ±a VARCHAR(50)
+    @contraseña VARCHAR(50)
 AS
 BEGIN
     -- Verificar si el usuario ya existe en la tabla
     IF EXISTS (SELECT 1 FROM dbo.TbUsuarios WHERE UserName = @nombreUsuario)
     BEGIN
-        -- Actualizar la contraseÃ±a existente
+        -- Actualizar la contraseña existente
         UPDATE dbo.TbUsuarios
-        SET ContraseÃ±a = CONVERT(VARBINARY(MAX), @contraseÃ±a)
+        SET Contraseña = CONVERT(VARBINARY(MAX), @contraseña)
         WHERE UserName = @nombreUsuario
     END
     ELSE
     BEGIN
         -- Insertar un nuevo registro
-        INSERT INTO dbo.TbUsuarios (UserName, ContraseÃ±a)
-        VALUES (@nombreUsuario, CONVERT(VARBINARY(MAX), @contraseÃ±a))
+        INSERT INTO dbo.TbUsuarios (UserName, Contraseña)
+        VALUES (@nombreUsuario, CONVERT(VARBINARY(MAX), @contraseña))
     END
 END
 /*
-Esto nada mÃ¡s lo hice pa entender cÃ³mo se conecta un Foreign key a una registro existente
+Esto nada más lo hice pa entender cómo se conecta un Foreign key a una registro existente
 INSERT INTO TbContactos Values ('guayito.palom0@gmail.com','69839847')
+INSERT INTO TbContactos Values ('juanpflapi@gmail.com', '8328932')
 Select * from TbContactos
-UPDATE TbUsuarios SET IDContacto = 1 WHERE UserName = 'Guayito'
+UPDATE TbUsuarios SET IDContacto = 3 WHERE UserName = 'Pepito'
+SELECT * FROM TbUsuarios where UserName = 'Pepito'
+SELECT * FROM TbPacientes 
 SELECT * FROM TbUsuarios where UserName = 'Guayito'
-EXEC CrearActualizarUsuario @nombreUsuario = 'ejemplo_usuario', @contraseÃ±a = 'ejemplo_contraseÃ±a';
+use DbMindLink
+EXEC CrearActualizarUsuario @nombreUsuario = 'ejemplo_usuario', @contraseña = 'ejemplo_contraseña';
 --- DROP Procedure PDCrearActualizarUsuario
 */
 
 /*
-El siguiente proceso es para solo ACTUALIZAR la contraseÃ±a de los usuarios basandonos en su correo electronico, mÃ¡s no crear usuarios, solo actualizar
-Basicamente esta hecho para recuperacion de contraseÃ±a por medio del correo electronico
+El siguiente proceso es para solo ACTUALIZAR la contraseña de los usuarios basandonos en su correo electronico, más no crear usuarios, solo actualizar
+Basicamente esta hecho para recuperacion de contraseña por medio del correo electronico
 */
 CREATE PROCEDURE PDActualizarContraGmail
     @Correo VARCHAR(300),
-    @contraseÃ±a VARCHAR(50)
+    @contraseña VARCHAR(50)
 AS
 BEGIN
     -- Verificar si el usuario ya existe en la tabla
@@ -644,14 +651,14 @@ BEGIN
 	SET @IDContacto =  (SELECT IDContacto FROM TbContactos WHERE Correo = @Correo)
 	DECLARE @IDUsuario INT;
 	SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE IDContacto = @IDContacto)
-        -- Actualizar la contraseÃ±a existente
-		DECLARE @HashContraseÃ±aTbU VARBINARY (64);
+        -- Actualizar la contraseña existente
+		DECLARE @HashContraseñaTbU VARBINARY (64);
 		DECLARE @newHash VARBINARY (64);
-		SET @HashContraseÃ±aTbU = HASHBYTES('SHA2_256', @contraseÃ±a);
-		SET @newHash = HASHBYTES('SHA2_256', @HashContraseÃ±aTbU);
+		SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @contraseña);
+		SET @newHash = HASHBYTES('SHA2_256', @HashContraseñaTbU);
 
         UPDATE dbo.TbUsuarios
-		SET ContraseÃ±a = @newHash
+		SET Contraseña = @newHash
         WHERE IDUsuario = @IDUsuario
     END
 	ELSE 
@@ -660,15 +667,15 @@ BEGIN
 	END
 END
 
-Exec PDActualizarContraGmail'guayito.palom0@gmail.com', 'Melocoton';
+Exec PDActualizarContraGmail 'guayito.palom0@gmail.com', 'Melocoton';
 SELECT * from TbUsuarios
 
 /*
-El siguiente ploceso es para cambiar la contraseÃ±a con el numero de telefono
+El siguiente ploceso es para cambiar la contraseña con el numero de telefono
 */
 CREATE PROCEDURE PDActualizarContraNum
     @Num VARCHAR(50),
-    @contraseÃ±a VARCHAR(50)
+    @contraseña VARCHAR(50)
 AS
 BEGIN
     -- Verificar si el usuario ya existe en la tabla
@@ -679,14 +686,14 @@ BEGIN
 	SET @IDContacto =  (SELECT IDContacto FROM TbContactos WHERE NumTelefonico = @Num)
 	DECLARE @IDUsuario INT;
 	SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE IDContacto = @IDContacto)
-        -- Actualizar la contraseÃ±a existente
-		DECLARE @HashContraseÃ±aTbU VARBINARY (64);
+        -- Actualizar la contraseña existente
+		DECLARE @HashContraseñaTbU VARBINARY (64);
 		DECLARE @newHash VARBINARY (64);
-		SET @HashContraseÃ±aTbU = HASHBYTES('SHA2_256', @contraseÃ±a);
-		SET @newHash = HASHBYTES('SHA2_256', @HashContraseÃ±aTbU);
+		SET @HashContraseñaTbU = HASHBYTES('SHA2_256', @contraseña);
+		SET @newHash = HASHBYTES('SHA2_256', @HashContraseñaTbU);
 
         UPDATE dbo.TbUsuarios
-		SET ContraseÃ±a = @newHash
+		SET Contraseña = @newHash
         WHERE IDUsuario = @IDUsuario
     END
 	ELSE 
@@ -742,16 +749,177 @@ EXEC PdBuscarNum '69839847', @NumeroExis OUTPUT;
 SELECT @NumeroExis AS NumeroExistente;
 
 /*
-Desde aquÃ­ comienzan las vistas
+Desde aquí comienzan las vistas
 
 */
---Esta vista es para ver el usuario, la contraseÃ±a y el cargo de un empleado
+
+/*
+Procesos de Chris para Android:
+*/
+/*
+Pantalla de notas:
+Un proceso que almacene los datos 
+ingresados en notas y una vista que muestre la 
+nota que el usuario recien acaba de ingresar  
+para que este se muestre en el sector de notas.
+*/
+
+/*
+Creamos el procedimiento
+*/
+
+CREATE PROCEDURE PDInsertarAgendaPersonal(
+    @Contenido varchar(100),  
+	@username1 varchar(50)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+    DECLARE @FechaActual date = GETDATE();
+	DECLARE @username VARCHAR(50);
+	DECLARE @IDUsuario INT;
+	DECLARE @PacienteExit INT;
+
+
+	SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE Username = @username1);
+	SET @PacienteExit = (SELECT IDPaciente FROM TbPacientes WHERE IDUsuario = @IDUsuario);
+
+    INSERT INTO TbAgendasPersonales (Contenido, Fecha, IDPaciente )
+    VALUES (@Contenido, @FechaActual, @PacienteExit);
+END;
+
+
+EXEC PDInsertarAgendaPersonal 'Contenido de la agenda', 'Pepito';
+
+
+/*
+Un proceso donde se pueda enviar datos a la base de datos
+en la tabla correspondiente y hacer una vista donde se pueda
+ver los comentarios que otros usarios ya habian mandado 
+a la base de datos y tambien muestre el comentario que 
+acaba de ingresar el usuario.
+*/
+
+ALTER PROCEDURE PDGuardarComentario
+    @mensaje varchar(1000),
+	@Username varchar (50)
+AS
+BEGIN
+    DECLARE @fechaActual datetime
+	DECLARE @IDUsuario INT;
+	DECLARE @PacienteExit INT;
+
+    SET @fechaActual = GETDATE()
+	SET @IDUsuario = (SELECT IDUsuario FROM TbUsuarios WHERE Username = @Username);
+	SET @PacienteExit = (SELECT IDPaciente FROM TbPacientes WHERE IDUsuario = @IDUsuario);
+    INSERT INTO TbComentarios (Mensaje, Fecha, IDPaciente)
+    VALUES (@mensaje, @fechaActual, @PacienteExit)
+END
+
+EXEC PDGuardarComentario 'Este es un comentario de ejemplo', 'Pepito';
+--Se generaron 30 comentarios, investigar por qué
+
+/*
+Un proceso donde almacena los datos ingresados por 
+el usuario y quede guardado en la base de datos en
+la tabla correspondiente.
+*/
+
+--Creamos el procedimiento que guarde los datos
+
+create PROCEDURE PDInsertarAcercademi (
+    @Nombre varchar(90),
+    @Apellido varchar(90),
+    @CorreoElectronico varchar(90),
+    @DUI varchar(20)
+)
+AS
+BEGIN
+    SET NOCOUNT ON;
+ END
+END;
+
+EX
+    IF NOT EXISTS (SELECT 1 FROM TbPacientes WHERE DUI = @DUI)
+    BEGIN
+        INSERT INTO TbPacientes (Nombre, Apellido, CorreoElectronico, FNacimiento, DUI)
+        VALUES (@Nombre, @Apellido, @CorreoElectronico, GETDATE(), @DUI);
+   EC PDInsertarPaciente 'Nombre del paciente', 'Apellido del paciente', 'correo@example.com', '123456789';
+
+/*
+Creamos la vista
+*/
+
+CREATE VIEW VistaNota
+AS
+SELECT Contenido, Fecha, IDPaciente
+FROM TbAgendasPersonales
+WHERE Fecha = (SELECT MAX(Fecha) FROM TbAgendasPersonales)
+
+SELECT * FROM VistaNota
+
+
+--Esta vista es para ver el usuario, la contraseña y el cargo de un empleado
 CREATE VIEW VistaUsuarios
 AS
-SELECT u.UserName, u.ContraseÃ±a, t.Cargo
+SELECT u.UserName, u.Contraseña, t.Cargo
 FROM TbUsuarios u
 INNER JOIN TbTipoUsuarios t ON t.IDTipoUsuario = t.IDTipoUsuario
 
+/*
+Vista de anuncio:
+Una vista que muestres los anuncios que el Admin 
+guardada en la base de datos para que este se muestre en la app de android
+*/
+
+--Queda pendiente revisar que solo se muestre un anuncio a la vez
+CREATE VIEW VistaAnuncios
+AS
+SELECT IDAnuncio, Titulo, Descripcion, Imagen, Fecha
+FROM TbAnuncio
+
+SELECT * FROM VistaAnuncios
+
+/*Duda: Aqui preguntarle a guayito sobre la magen del anuncio!*/
+
+/*
+Vista de calendario de cita:
+Una vista ya que el calendario
+debe de marcar una cita que el usuario 
+debe ir a la clinica entonces supongo que la 
+vista debe de buscar en la base de datos la fecha
+de la cita que el cliente debe ir.
+*/
+
+CREATE VIEW VistaFechaCitaCliente
+AS
+SELECT Fecha, IDPaciente
+FROM TbCitas
+--Investigar cómo poner la vista en base de un idpaciente especifico
+
+SELECT * FROM VistaFechaCitaCliente
+
+
+
+
+CREATE VIEW VistaComentarios
+AS
+SELECT IDComentario, Mensaje, Fecha, Username
+FROM TbComentarios
+INNER JOIN TbUsuario
+
+--Fumar mucho weed y pensar cómo funcionará
+
+SELECT * FROM VistaComentarios;
+
+CREATE VIEW VistaPacientes AS
+SELECT IDPaciente, Nombre, Apellido, CorreoElectronico, FNacimiento, DUI
+FROM TbPacientes;
+
+SELECT * FROM VistaPacientes;
+
+
 --Esto es para seleccionar la vista:
---SELECT * FROMÂ VistaUsuarios
+--SELECT * FROM VistaUsuarios
 -- DROP VIEW VistaUsuarios
+
