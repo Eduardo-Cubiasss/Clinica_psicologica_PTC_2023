@@ -20,7 +20,7 @@ class RecordarPassword : AppCompatActivity() {
             val btnTextRegistrarseEnRecuperar1 = findViewById<TextView>(R.id.btnRegistrarteEnRecuperacion1)
 
             btnTextRegistrarseEnRecuperar1.setOnClickListener {
-                val intent: Intent = Intent(this, Registrarse::class.java)
+                val intent: Intent = Intent(this, Registrarse2::class.java)
                 startActivity(intent)
             }
     }

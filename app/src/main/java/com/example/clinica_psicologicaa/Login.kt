@@ -26,7 +26,7 @@ class Login : AppCompatActivity() {
         val btnTextRegister = findViewById<TextView>(R.id.btnRegistrar)
 
         btnTextRegister.setOnClickListener {
-            val intent: Intent = Intent(this, Registrarse::class.java)
+            val intent: Intent = Intent(this, Registrarse2::class.java)
             startActivity(intent)
         }
 
