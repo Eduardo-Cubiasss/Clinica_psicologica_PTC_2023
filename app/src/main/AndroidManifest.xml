@@ -43,9 +43,6 @@
             android:name=".RecordarPassword"
             android:exported="false" />
         <activity
-            android:name=".Registrarse"
-            android:exported="false" />
-        <activity
             android:name=".Login"
             android:exported="false" />
         <activity

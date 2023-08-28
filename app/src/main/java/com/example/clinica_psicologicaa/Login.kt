@@ -8,6 +8,8 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
+import com.example.clinica_psicologicaa.ui.dashboard.DashboardFragment
+import com.example.clinica_psicologicaa.ui.dashboard.DashboardViewModel
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException
@@ -38,12 +40,14 @@ class Login : AppCompatActivity() {
 
         }
 
-        val btnIniciarSesion = findViewById<ImageButton>(R.id.btnIniciarSesion)
+        val btnIniciarSesion: ImageButton = findViewById/*<ImageButton>*/(R.id.btnIniciarSesion)
 
         btnIniciarSesion.setOnClickListener {
-            val intent: Intent = Intent(this, Inicio::class.java)
+            val intent: Intent = Intent(this@Login, docsapoyo::class.java)
             startActivity(intent)
+            finish()
         }
+
 
         /*
                     Username = findViewById(R.id.Usuario)
