@@ -9,12 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import java.sql.PreparedStatement
 import java.sql.SQLException
 import java.sql.Date
-
+import java.util.regex.Pattern
 class Registrarse2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registrarse)
-
 
         lateinit var txtNombre : EditText
         lateinit var txtApellidos : EditText
@@ -28,7 +27,6 @@ class Registrarse2 : AppCompatActivity() {
         val btnTextOiniciarsesion = findViewById<TextView>(R.id.btnOiniciarsesion)
         btnTextOiniciarsesion.setOnClickListener {
             val intent: Intent = Intent(this, Login::class.java)
-
             startActivity(intent)
         }
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:backgroundTint="#FFFFFF"
+    android:backgroundTint="#ffffff"
     tools:context=".activity_acercademi"
     tools:layout_editor_absoluteX="-1dp"
     tools:layout_editor_absoluteY="-1dp">
@@ -36,7 +36,7 @@
         app:layout_constraintVertical_bias="0.735" />
 
     <EditText
-        android:id="@+id/editTextText14"
+        android:id="@+id/txtCorreoadm"
         android:layout_width="355dp"
         android:layout_height="35dp"
         android:ems="10"
@@ -50,7 +50,7 @@
         app:layout_constraintVertical_bias="0.643" />
 
     <EditText
-        android:id="@+id/editTextText13"
+        android:id="@+id/txtTelfadm"
         android:layout_width="355dp"
         android:layout_height="35dp"
         android:ems="10"
@@ -232,10 +232,10 @@
         android:layout_height="38dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.525"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.652"
+        app:layout_constraintVertical_bias="0.645"
         app:srcCompat="@drawable/sis" />
 
     <ImageView
@@ -263,31 +263,29 @@
         app:srcCompat="@drawable/sis" />
 
     <EditText
-        android:id="@+id/editTextText10"
+        android:id="@+id/txtNombreadm"
         android:layout_width="355dp"
         android:layout_height="35dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36" />
+        app:layout_constraintVertical_bias="0.372" />
 
     <EditText
-        android:id="@+id/editTextText11"
+        android:id="@+id/txtApellidoadm"
         android:layout_width="355dp"
         android:layout_height="35dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456" />
+        app:layout_constraintVertical_bias="0.484" />
 
     <ImageView
         android:id="@+id/imageView52"
@@ -303,23 +301,22 @@
 
     <ImageView
         android:id="@+id/imageView53"
-        android:layout_width="75dp"
-        android:layout_height="25dp"
+        android:layout_width="112dp"
+        android:layout_height="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.824"
+        app:layout_constraintHorizontal_bias="0.879"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.542"
+        app:layout_constraintVertical_bias="0.554"
         app:srcCompat="@drawable/sada" />
 
     <EditText
-        android:id="@+id/editTextText15"
+        android:id="@+id/txtEdadadm"
         android:layout_width="65dp"
         android:layout_height="29dp"
         android:ems="10"
         android:inputType="text"
-        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.236"
@@ -328,17 +325,19 @@
         app:layout_constraintVertical_bias="0.541" />
 
     <EditText
-        android:id="@+id/editTextText16"
-        android:layout_width="71dp"
-        android:layout_height="23dp"
+        android:id="@+id/txtDuiadm"
+        android:layout_width="110dp"
+        android:layout_height="48dp"
         android:ems="10"
+        android:foregroundTint="#000000"
         android:inputType="text"
-        android:text="Name"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.814"
+        app:layout_constraintHorizontal_bias="0.873"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.562" />
+        app:layout_constraintVertical_bias="0.55"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
