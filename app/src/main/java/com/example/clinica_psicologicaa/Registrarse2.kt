@@ -1,7 +1,6 @@
 package com.example.clinica_psicologicaa
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
@@ -9,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import java.sql.PreparedStatement
 import java.sql.SQLException
-import java.time.LocalDate
 import java.sql.Date
 
 class Registrarse2 : AppCompatActivity() {
@@ -23,7 +21,7 @@ class Registrarse2 : AppCompatActivity() {
         lateinit var txtNacimiento : EditText
         lateinit var txtIdClinica : EditText
         lateinit var txtContraseña : EditText
-        lateinit var txtNumero : EditText
+        lateinit var txtCorreo : EditText
         lateinit var txtUsuario : EditText
         lateinit var btnCrearCuenta: ImageButton
 
@@ -40,10 +38,9 @@ class Registrarse2 : AppCompatActivity() {
         txtIdClinica = findViewById(R.id.txtIdClinica)
         txtUsuario = findViewById(R.id.txtUsuario)
         txtContraseña = findViewById(R.id.txtContraseña)
-        txtNumero = findViewById(R.id.txtNumero)
+        txtCorreo = findViewById(R.id.txtCorreo)
 
         btnCrearCuenta = findViewById(R.id.btnCrearCuenta)
-
         btnCrearCuenta.setOnClickListener {
             print("boton funciona")
 
@@ -53,11 +50,10 @@ class Registrarse2 : AppCompatActivity() {
             val IdClinica = txtIdClinica.text.toString()
             val usuarios = txtUsuario.text.toString()
             val password = txtContraseña.text.toString()
-            val Telefonos = txtNumero.text.toString()
+            val Correo = txtCorreo.text.toString()
 
             try {
                 val addPersona:PreparedStatement = ConexionSQL().dbConn()?.prepareStatement("EXEC PDRegistrarpaciente ?,?,?,?,?,?,?" ) !!
-                print("Almacenar a la base funciona")
 
                 addPersona.setString(1, Nombres)
                 addPersona.setString(2, Apellidos)
@@ -65,7 +61,7 @@ class Registrarse2 : AppCompatActivity() {
                 addPersona.setString(4, IdClinica)
                 addPersona.setString(5, usuarios)
                 addPersona.setString(6, password)
-                addPersona.setString(7, Telefonos)
+                addPersona.setString(7, Correo)
 
                 addPersona.executeUpdate()
 
@@ -74,7 +70,7 @@ class Registrarse2 : AppCompatActivity() {
                 startActivity(intent)
 
             }catch (ex: SQLException){
-                println("ESTE ES EL ERROR: ${ex.toString()}")
+                Toast.makeText(this, "Error al registrar el usuario", Toast.LENGTH_SHORT).show()
 
             }
         }
